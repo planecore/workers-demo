@@ -5,7 +5,7 @@ import { Calculator } from "./components/calculator"
 import { squareRoot, squared, multiply, randomizeAndSort } from "./data/calculations"
 
 function App() {
-  const [maxNumber, setMaxNumber] = useState(100000000)
+  const [maxNumber, setMaxNumber] = useState(20000000)
 
   return (
     <div className="app">
@@ -21,7 +21,7 @@ function App() {
           Multiply of all numbers until {maxNumber}
         </Calculator>
         <Calculator maxNumber={maxNumber / 100} action={randomizeAndSort}>
-          Randomize and sort all numbers until {maxNumber / 1000}
+          Randomize and sort all numbers until {maxNumber / 20}
         </Calculator>
       </div>
     </div>
