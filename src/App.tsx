@@ -1,5 +1,6 @@
 import "./App.css"
 import { useState } from "react"
+import { events } from "./data/events"
 import { Button, Input, Text } from "@geist-ui/core"
 import { Calculator } from "./components/calculator"
 import { squareRoot, squared, multiply, randomizeAndSort } from "./data/calculations"
@@ -29,9 +30,9 @@ function App() {
         <Calculator maxNumber={maxNumber} action={multiply}>
           Multiply of all numbers until {maxNumber}
         </Calculator>
-        <Calculator maxNumber={maxNumber} action={randomizeAndSort}>
-          Randomize and sort all numbers until {maxNumber}
-        </Calculator>
+        <Button type="warning" onClick={() => events.emit("calculateAll")}>
+          Calculate All
+        </Button>
       </div>
     </div>
   )
