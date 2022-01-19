@@ -5,7 +5,7 @@ import { Calculator } from "./components/calculator"
 import { squareRoot, squared, multiply, randomizeAndSort } from "./data/calculations"
 
 function App() {
-  const [maxNumber, setMaxNumber] = useState(20000000)
+  const [maxNumber, setMaxNumber] = useState(50000000)
 
   return (
     <div className="app">
