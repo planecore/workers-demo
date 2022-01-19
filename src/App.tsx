@@ -1,43 +1,29 @@
+import "./app.css"
 import { useState } from "react"
-import logo from "./logo.svg"
-import "./App.css"
+import { Text } from "@geist-ui/core"
+import { Calculator } from "./components/calculator"
+import { squareRoot, squared, multiply, randomizeAndSort } from "./data/calculations"
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [maxNumber, setMaxNumber] = useState(10000000)
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {" | "}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+    <div className="app">
+      <Text h1>Welcome to my amazing demo!</Text>
+      <div>
+        <Calculator maxNumber={maxNumber} action={squareRoot}>
+          Square root of all numbers until {maxNumber}
+        </Calculator>
+        <Calculator maxNumber={maxNumber} action={squared}>
+          Square of all numbers until {maxNumber}
+        </Calculator>
+        <Calculator maxNumber={maxNumber} action={multiply}>
+          Multiply of all numbers until {maxNumber}
+        </Calculator>
+        <Calculator maxNumber={maxNumber} action={randomizeAndSort}>
+          Randomize and sort all numbers until {maxNumber}
+        </Calculator>
+      </div>
     </div>
   )
 }
