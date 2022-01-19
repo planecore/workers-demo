@@ -20,7 +20,7 @@ function App() {
         <Calculator maxNumber={maxNumber} action={multiply}>
           Multiply of all numbers until {maxNumber}
         </Calculator>
-        <Calculator maxNumber={maxNumber / 100} action={randomizeAndSort}>
+        <Calculator maxNumber={maxNumber / 20} action={randomizeAndSort}>
           Randomize and sort all numbers until {maxNumber / 20}
         </Calculator>
       </div>
