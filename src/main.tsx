@@ -3,7 +3,7 @@ import ReactDOM from "react-dom"
 import { CssBaseline, GeistProvider } from "@geist-ui/core"
 
 import "./index.css"
-import App from "./app"
+import App from "./App"
 
 ReactDOM.render(
   <React.StrictMode>
