@@ -1,4 +1,4 @@
-import "./app.css"
+import "./App.css"
 import { useState } from "react"
 import { Text } from "@geist-ui/core"
 import { Calculator } from "./components/calculator"
