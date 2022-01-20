@@ -3,3 +3,14 @@
   text-align: center;
   justify-content: center;
 }
+
+.calculators {
+  padding: 8px;
+}
+
+.use-workers-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}

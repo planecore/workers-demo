@@ -1,45 +1,52 @@
-import "./calculator.css"
 import { Button } from "@geist-ui/core"
 import { useWorker } from "@koale/useworker"
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+
+import "./calculator.css"
 import { events } from "../data/events"
+import { useCalculatorContext } from "../data/calculator-context"
 
 interface CalculatorProps {
-  maxNumber: number
-  action: (maxNumber: number) => number | number[]
+  action: (maxNumber: number) => void
 }
 
-const Calculator: React.FC<CalculatorProps> = ({ children, maxNumber, action }) => {
-  const [worker, { status, kill }] = useWorker(action)
+const Calculator: React.FC<CalculatorProps> = ({ children, action }) => {
+  const { maxNumber, useWorkers } = useCalculatorContext()
+
+  const [worker, { kill }] = useWorker(action)
+  const [isRunning, setIsRunning] = useState(false)
   const [resultStatus, setResultStatus] = useState<string | null>(null)
-  const handle = useRef<any>(null)
+
+  const resultTimeoutHandle = useRef<any>(null)
 
   useEffect(() => {
-    const unlisten = events.on("calculateAll", runWorker)
+    const unlisten = events.on("calculateAll", runAction)
     return unlisten
-  }, [])
+  }, [useWorkers])
 
-  const runWorker = async () => {
-    handle.current && clearTimeout(handle.current)
+  const runAction = async () => {
+    resultTimeoutHandle.current && clearTimeout(resultTimeoutHandle.current)
     kill()
     setResultStatus(null)
     const start = new Date()
-    await worker(maxNumber)
+    setIsRunning(true)
+    if (useWorkers) {
+      await worker(maxNumber)
+    } else {
+      action(maxNumber)
+    }
+    setIsRunning(false)
     const end = new Date()
     const time = Math.abs(end.getTime() - start.getTime())
     setResultStatus(`Finished in ${time}ms`)
-    handle.current = setTimeout(() => {
+    resultTimeoutHandle.current = setTimeout(() => {
       setResultStatus(null)
     }, 3000)
   }
 
   return (
     <div className="calculator">
-      <Button
-        loading={status === "RUNNING"}
-        type={resultStatus ? "success" : "default"}
-        onClick={runWorker}
-      >
+      <Button loading={isRunning} type={resultStatus ? "success" : "default"} onClick={runAction}>
         {resultStatus ?? children}
       </Button>
     </div>
